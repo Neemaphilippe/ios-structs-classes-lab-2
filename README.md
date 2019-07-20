@@ -12,6 +12,16 @@ struct Room {
      let width: Double
 }
 ```
+```
+struct Room {
+    let maxOccupancy: Int
+    let length: Double
+    let width: Double
+}
+let myRoom = Room(maxOccupancy: 45, length: 3.0, width: 2.0)
+let myRoomSpecs = myRoom
+print(myRoom.length)
+```
 
 ## Question 2
 
@@ -23,7 +33,13 @@ class Bike {
     var hasBell = false
 }
 ```
-
+```
+var myBike = Bike()
+var bigWheel = myBike
+bigWheel.wheelNumber = 3
+print(myBike.wheelNumber)
+print(bigWheel.wheelNumber)
+```
 ## Question 3
 
 a. Given the Animal class below, create a Bird subclass with a new `canFly` property.
@@ -36,7 +52,21 @@ class Animal {
     }
 }
 ```
-
+```
+class Bird: Animal {
+    var canFly: Bool = true
+    init(canFly: Bool) {
+        self.canFly = canFly
+}
+    override func printDescription() {
+        if canFly == true {
+            print("I am a bird named \(name), and I can fly")
+            } else {
+                print("I am a bird and cannot fly")
+            }
+        }
+}
+```
 b. Override the printDescription method to have the instance of the Bird object print out its name and whether it can fly
 
 
@@ -122,7 +152,22 @@ let pointTwo = Point(x: 10, y: 10)
 
 print(pointOne.distance(to: pointTwo)) //Prints 14.142135623730951
 ```
+```
+struct Point {
+    let x: Double
+    let y: Double
+    func distance(to point: Point) -> Double {
+        let horizontal = self.x - point.x
+        let vertical = self.y - point.y
+        return sqrt(horizontal * horizontal + vertical * vertical)
+    }
+}
 
+//let pointOne = Point(x: 0, y: 0)
+//let pointTwo = Point(x: 10, y: 10)
+//
+//print(pointOne.distance(to: pointTwo)) 
+```
 
 b. Given the above Point object, and Circle object below, add a `contains` method that returns whether or not a given point is on the circle
 
@@ -141,6 +186,20 @@ circleOne.contains(pointTwo) //true
 circleOne.contains(pointThree) // false
 circleOne.contains(pointFour) //true
 ```
+```
+struct Circle {
+    let radius: Double
+    let center: Point
+    func contain(point: Point) -> Bool{
+        return center.distance(to:point) == radius
+}
+    func gimmeRandomPoint() -> Point {
+        let x = Double = Double.random(in: (0 - radius)...radius)
+        let y = sqrt(radius * radius - x * x)
+        return Point(x: x, y: y)
+    }
+}
+```
 
 c. Add another method to `Circle` that returns a random point on the circle
 
@@ -153,7 +212,16 @@ Hint: Given the radius of a circle and the x value of a point on the circle, the
 ```swift
 circleOne.contains(circleOne.getRandomPoint()) //Should always be true
 ```
-
+```
+let pointOne = Point(x: 0, y: 0)
+let circleOne = Circle(radius: 5, center: pointOne)
+let pointTwo = Point(x: 5, y: 0)
+let pointThree = Point(x: 4, y: 0)
+let pointFour = Point(x: sqrt(12.5), y: sqrt(12.5))
+circleOne.contains(pointTwo) true
+circleOne.contains(pointThree) false
+circleOne.contains(pointFour) true
+```
 
 ## Question 7
 
